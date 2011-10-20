@@ -1,0 +1,32 @@
+#title-slide h1 {
+	color: #C00;
+}
+
+#title-slide h2 {
+  color: #666;
+  padding: 0 48px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 65%;
+  -webkit-transform: translate(0, -65%);
+  -moz-transform: translate(0, -65%);
+  -ms-transform: translate(0, -65%);
+  -o-transform: translate(0, -65%);
+  transform: translate(0, -65%);
+  text-align: center;
+}
+
+#title-slide h3 {
+  padding: 0 48px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70%;
+  -webkit-transform: translate(0, -70%);
+  -moz-transform: translate(0, -70%);
+  -ms-transform: translate(0, -70%);
+  -o-transform: translate(0, -70%);
+  transform: translate(0, -70%);
+  text-align: center;
+}
