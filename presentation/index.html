@@ -19,6 +19,8 @@
 	<link rel="stylesheet" href="../extensions/navigation/deck.navigation.css">
 	<link rel="stylesheet" href="../extensions/status/deck.status.css">
 	<link rel="stylesheet" href="../extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="../extensions/codemirror/deck.codemirror.css">
+	<link rel="stylesheet" href="../extensions/codemirror/themes/default.css">
 	
 	<link rel="stylesheet" id="style-theme-link" href="../themes/style/swiss.css">
 	<link rel="stylesheet" id="transition-theme-link" href="../themes/transition/horizontal-slide.css">
@@ -70,7 +72,7 @@
 				<li><a href="http://leaverou.github.com/prefixfree/">-prefix-free</a></li>
 			</ul>
 		</li>
-		<li class="slide">Networking (AJA*)</li>
+		<li class="slide">Networking (AJAX, AJAH, AJAJ)</li>
 	</ul>
 </section>
 
@@ -91,162 +93,252 @@
 		<li>jQuery stands out
 			<ul>
 				<li>Widely used - 50% of top 10k sites (builtwith.com)</li>
-				<li>Well tested for compatibility &amp; performance</li>
-				<li>Supported by a strong community</li>
+				<li>Microsoft endorsed (included with Visual Studio)</li>
+				<li>Well tested for cross-compatibility &amp; performance</li>
+				<li>Large library of plug-ins</li>
 			</ul>
 		</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>jQuery is Just JavaScript</h2>
+	<h2>Getting Started</h2>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true">
+// Types, but not typed variables
+var subject = "world";
+
+var sayHello = function (message) {
+    console.log("Hello " + message + "!");
+}
+
+sayHello(subject);
+
+// Type inference
+sayHello('#' + (5 + 1));
+	</textarea>
+</section>
+
+<section class="slide">
+	<h2>Familiar Ground</h2>
 	<ul>
-		<li class="slide">It's not magic</li>
-		<li class="slide">It uses idiomatic JavaScript</li>
-		<li class="slide">What's that mean?</li>
+		<li>if</li>
+		<li>while</li>
+		<li>for</li>
+		<li>switch</li>
+		<li>try/catch/throw</li>
+		<li>== vs. ===</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Shallow End</h2>
-	<code>var subject = "world";</code>
+	<h2>Built-in Types</h2>
+	<ul>
+		<li>Primitive types - number, string, boolean, null, undefined</li>
+		<li>Arrays - operate like arrays, lists, queues, stack</li>
+		<li>Date</li>
+		<li>RegExp
+			<textarea class="code" mode="javascript" style="display: none;" runnable="true">
+console.log(/(no )?way/.test('way') ? 'righteous' : 'bummer');
+			</textarea>
+		</li>
+		<li>Function</li>
+	</ul>
 </section>
-
-
 
 <section class="slide">
-	<h2>Slide Template</h2>
+	<h2>I, Object!</h2>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true">
+var verbose = new Object();
+var terse = {};
+
+// More realistic
+var joey = {
+    name: "Joey",
+    sayHello: function() {
+        // What's this?
+        console.log("My name is " + this.name);
+    }
+};
+
+joey.sayHello();
+joey["sayHello"]();
+
+var whoSays = joey.sayHello;
+
+// Here, called without objective context
+whoSays();
+whoSays.call(joey);
+	</textarea>
 </section>
 
-
-
-
-<section class="slide" id="how-to-overview">
-	<h2>How to Make a Deck</h2>
-	<ol>
-		<li>
-			<h3>Write Slides</h3>
-			<p>Slide content is simple&nbsp;HTML.</p>
-		</li>
-		<li>
-			<h3>Choose Themes</h3>
-			<p>One for slide styles and one for deck&nbsp;transitions.</p>
-		</li>
-		<li>
-			<h3>Include Extensions</h3>
-			<p>Add extra functionality to your deck, or leave it stripped&nbsp;down.</p>
-		</li>
-	</ol>
-</section>
-
-<section class="slide" id="markup">
-	<h2>The Markup</h2>
-	<p>Slides are just HTML elements with a class of <code>slide</code>.</p>
-	<pre><code>&lt;section class=&quot;slide&quot;&gt;
-   &lt;h2&gt;How to Make a Deck&lt;/h2&gt;
-   &lt;ol&gt;
-      &lt;li&gt;
-         &lt;h3&gt;Write Slides&lt;/h3&gt;
-         &lt;p&gt;Slide content is simple HTML.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-         &lt;h3&gt;Choose Themes&lt;/h3&gt;
-         &lt;p&gt;One for slide styles and one for deck transitions.&lt;/p&gt;
-      &lt;/li&gt;
-      &hellip;
-   &lt;/ol&gt;
-&lt;/section&gt;</code></pre>
-</section>
-
-<section class="slide" id="themes">
-	<h2>Style Themes</h2>
-	<p>Customizes the colors, typography, and layout of slide&nbsp;content.</p>
-	<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/style-theme.css&quot;&gt;</code></pre>
-	<h2>Transition Themes</h2>
-	<p>Defines transitions between slides using CSS3 transitions.  Less capable browsers fall back to cutaways. But <strong>you</strong> aren&rsquo;t using <em>those</em> browsers to give your presentations, are&nbsp;you&hellip;</p>
-	<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/transition-theme.css&quot;&gt;</code></pre>
-</section>
-
-<section class="slide" id="extensions">
-	<h2>Extensions</h2>
-	<p>Core gives you basic slide functionality with left and right arrow navigation, but you may want more. Here are the ones included in this&nbsp;deck:</p>
-	
+<section class="slide">
+	<h2>Constructors</h2>
 	<ul>
-		<li class="slide" id="extensions-goto">
-			<strong>deck.goto</strong>: Adds a shortcut key to jump to any slide number.  Hit g, type in the slide number, and hit&nbsp;enter.
-		</li>
-		
-		<li class="slide" id="extensions-hash">
-			<strong>deck.hash</strong>: Enables internal linking within slides, deep linking to individual slides, and updates the address bar &amp; a permalink anchor with each slide&nbsp;change.
-		</li>
-
-		<li class="slide" id="extensions-menu">
-			<strong>deck.menu</strong>: Adds a menu view, letting you see all slides in a grid. Hit m to toggle to menu view, continue navigating your deck, and hit m to return to normal view. Touch devices can double-tap the deck to switch between&nbsp;views.
-		</li>
-
-		<li class="slide" id="extensions-navigation">
-			<strong>deck.navigation</strong>: Adds clickable left and right buttons for the less keyboard&nbsp;inclined.
-		</li>
-
-		<li class="slide" id="extensions-status">
-			<strong>deck.status</strong>: Adds a page number indicator. (current/total)
-		</li>
+		<li>A function called with the "new" keyword that returns an object</li>
+		<li>Capitalized by convention</li>
 	</ul>
-	
-	<p class="slide" id="extension-folders">Each extension folder in the download package contains the necessary JavaScript, CSS, and HTML&nbsp;files. For a complete list of extension modules included in deck.js, check out the&nbsp;<a href="http://imakewebthings.github.com/deck.js/docs">documentation</a>.</p>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true">
+function Person(name) {
+    this.name = name;
+    this.sayHello = function() {
+        console.log("My name is " + this.name);
+    }
+
+    // return of this implied
+}
+
+var joey = new Person("Joey");
+
+joey.sayHello();
+	</textarea>	
 </section>
 
-<section class="slide" id="nested">
-	<h2>Nested Slides</h2>
-	<p>That last slide had a few steps.  To create substeps in slides, just nest them:</p>
-	<pre><code>&lt;section class=&quot;slide&quot;&gt;
-  &lt;h2&gt;Extensions&lt;/h2&gt;
-  &lt;p&gt;Core gives you basic slide functionality...&lt;/p&gt;		
-  &lt;ul&gt;
-     &lt;li class=&quot;slide&quot;&gt;
-        &lt;h3&gt;deck.goto&lt;/h3&gt;
-        &lt;p&gt;Adds a shortcut key to jump to any slide number...&lt;/p&gt;
-     &lt;/li&gt;
-     &lt;li class=&quot;slide&quot;&gt;...&lt;/li&gt;	
-     &lt;li class=&quot;slide&quot;&gt;...&lt;/li&gt;
-     &lt;li class=&quot;slide&quot;&gt;...&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/section&gt;</code></pre>
+<section class="slide">
+	<h2>Classes</h2>
+    <ul>
+		<li class="slide">We don't need no stinking classes</li>
+		<li class="slide">You can build a "classical" inheritance model if you really want</li>
+		<li class="slide">But you really don't</li>
+	</ul>
 </section>
 
-<section class="slide" id="elements-images">
-	<h2>Other Elements: Images</h2>
-	<img src="http://placekitten.com/600/375" alt="Kitties">
-	<pre><code>&lt;img src=&quot;http://placekitten.com/600/375&quot; alt=&quot;Kitties&quot;&gt;</code></pre>
+<section class="slide">
+	<h2>Prototypical Inheritance</h2>
+    <ul>
+		<li>Every object has a special "prototype" property</li>
+		<li>Accessing a method or property of an object checks the object first, then the prototype</li>
+		<li>Because the prototype itself is an object, the chain can be extended</li>
+		<li>All objects created with the same constructor share a prototype</li>
+	</ul>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true">
+function Person(name) {
+    this.name = name;
+}
+
+var joey = new Person("Joey");
+
+Person.prototype.sayHello = function() {
+    console.log("My name is " + this.name);
+}
+
+var bobby = new Person("Bobby Tables");
+
+joey.sayHello();
+bobby.sayHello();</textarea>
 </section>
 
-<section class="slide" id="elements-blockquotes">
-	<h2>Other Elements: Blockquotes</h2>
-	<blockquote cite="http://example.org">
-		<p>Food is an important part of a balanced diet.</p>
-		<p><cite>Fran Lebowitz</cite></p>
-	</blockquote>
-	<pre><code>&lt;blockquote cite=&quot;http://example.org&quot;&gt;
-  &lt;p&gt;Food is an important part of a balanced diet.&lt;/p&gt;
-  &lt;p&gt;&lt;cite&gt;Fran Lebowitz&lt;/cite&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</code></pre>
+<section class="slide">
+	<h2>More Prototypes</h2>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true">
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.sayHello = function() {
+    console.log("My name is " + this.name);
+}
+
+function Employee(name, position) {
+    this.position = position;
+    this.name = name;
+}
+
+Employee.prototype = new Person();
+Employee.prototype.constuctor = Employee;
+
+Employee.prototype.whatDoYouDo = function() {
+    console.log("I'm a " + this.position);
+}
+
+var homer = new Employee("Homer", "Nuclear Power Engineer");
+homer.sayHello();
+homer.whatDoYouDo();</textarea>
 </section>
 
-<!--
-
-<section class="slide" id="elements-videos">
-	<h2>Other Elements: Video Embeds</h2>
-	<p>Embed videos from your favorite online video service or with an HTML5 video&nbsp;element.</p>
-	
-	<iframe src="http://player.vimeo.com/video/1063136?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" frameborder="0"></iframe>
-	
-	<pre><code>&lt;iframe src=&quot;http://player.vimeo.com/video/1063136?title=0&amp;amp;byline=0&amp;amp;portrait=0&quot; width=&quot;400&quot; height=&quot;225&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</code></pre>
+<section class="slide">
+	<h2>The jQuery Function</h2>
+	<ul>
+		<li>jQuery() or $()</li>
+		<li>Behaves differently based on type of input
+			<ul>
+				<li>DOM Elements => Wrap in jQuery set</li>
+			    <li>String => Select elements OR create elements from HTML</li>
+			    <li>Function => Register for document.ready</li>
+			</ul>
+		</li>
+		<li>Return value is usually another jQuery set, which enables "method chaining"</li>
+	</ul>
 </section>
--->
 
-<section class="slide" id="digging-deeper">
-	<h2>Digging Deeper</h2>
-	<p>If you want to learn about making your own themes, extending deck.js, and more, check out the&nbsp;<a href="../docs/">documentation</a>.</p>
+<section class="slide" id="jQuerySelectors">
+	<h2>Selectors</h2>
+	<ul>
+		<li>A combination of CSS 3 &amp; XPath for locating DOM elements</li>
+	</ul>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true" globals="$">
+console.log('List items: ' + $('#jQuerySelectors li').length);
+
+console.log('Headers & list items: ' 
+    + $('#jQuerySelectors h2, #jQuerySelectors li').length);
+
+console.log('Headers & list items, context: ' 
+    + $('h2, li', '#jQuerySelectors').length);
+
+$('section[id$=Selectors]')
+    .css('border', 'thin red solid');
+
+$('section[id$=Selectors]').css({
+    'background': '#CCC',
+    'color': '#C00'
+});</textarea>
+</section>
+
+<section class="slide">
+	<h2>Event Handling</h2>
+	<button id="ClickDemo">Click Me!</button>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true" globals="$">
+$('#ClickDemo').click(function() {
+    alert("clicked!");
+});
+
+// Similar API for select lists, hovering elements, key presses
+
+// Live / Delegated events
+$('.DynamicClickMe').live('click', function() {
+    // Any current or future elements that match will have this handler attached
+});
+	</textarea>
+</section>
+
+<section class="slide">
+	<h2>DOM Manipulation</h2>
+	<ul id="DomManipulation">
+	</ul>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true" globals="$">
+$('#DomManipulation').append('<li>item</li>');
+// Other positions
+// Add/remove/toggle CSS classes
+// Add/remove attributes
+// Get/set innerHTML, height/width</textarea>	
+</section>
+
+<section class="slide">
+	<h2>Animation</h2>
+	<ul id="Animation">
+	</ul>
+	<textarea class="code" mode="javascript" style="display: none;" runnable="true" globals="$">
+$('<li>item</li>')
+    .hide()
+    .appendTo('#Animation')
+    .fadeIn('slow');</textarea>
+</section>
+
+<section class="slide">
+	<h2>Building on jQuery</h2>
+	<ul>
+		<li>Plug-ins</li>
+		<li>jQuery UI</li>
+		<li>jQuery Mobile</li>
+	</ul>
 </section>
 
 <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
@@ -267,9 +359,7 @@
 <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
 
 
-<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../jquery-1.6.4.min.js"><\/script>')</script>
+<script src="../jquery-1.6.4.min.js"></script>
 
 <!-- Deck Core and extensions -->
 <script src="../core/deck.core.js"></script>
@@ -278,12 +368,33 @@
 <script src="../extensions/status/deck.status.js"></script>
 <script src="../extensions/navigation/deck.navigation.js"></script>
 <script src="../extensions/hash/deck.hash.js"></script>
+<!-- Base codemiror code -->
+<script src="../extensions/codemirror/codemirror.js"></script>
+
+<!-- Syntax highlighting Modes -->
+
+<!-- javascript -->
+<script src="../extensions/codemirror/mode/javascript/javascript.js"></script>
+
+<!-- html mode (note html mode requires xml, css and javascript) -->
+<script src="../extensions/codemirror/mode/xml/xml.js"></script>
+<script src="../extensions/codemirror/mode/css/css.js"></script>
+<script src="../extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+<!-- Plugin code -->
+<script src="../extensions/codemirror/deck.codemirror.js"></script>
+
 
 <!-- Specific to this page -->
 <script>
 $(function() {
 	// Deck initialization
 	$.deck('.slide');
+
+	$('#ClickDemo').click(function() {
+	    alert("clicked!");
+	});
+
 });
 </script>
 
